@@ -30,6 +30,8 @@ function App() {
 
   const leftCount = todos.filter((todo) => !todo.done).length
 
+  const sortedTodos = [...todos].sort((a, b) => Number(a.done) - Number(b.done))
+
   return (
     <main className="app">
       <h1>할 일 목록</h1>
@@ -45,11 +47,12 @@ function App() {
       </form>
 
       <ul className="todo-list">
-        {todos.map((todo) => (
+        {sortedTodos.map((todo) => (
           <li key={todo.id} className={todo.done ? 'done' : ''}>
             <label>
               <input
                 type="checkbox"
+                className="toggle"
                 checked={todo.done}
                 onChange={() => toggleTodo(todo.id)}
               />
