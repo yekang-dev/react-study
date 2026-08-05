@@ -31,6 +31,8 @@ function App() { //하나의 컴포넌트 함수.
     );
   };
 
+  const finishCount = todos.filter((todo) => !todo.done).length;
+
   // === Todo 삭제 함수
   const deleteTodo = (id) => {
     // filter 조건에 맞는 것만 남기는 함수.
@@ -41,15 +43,18 @@ function App() { //하나의 컴포넌트 함수.
   return (
     <div style={{ maxWidth: 400, margin: '50px auto', fontFamily: 'sans-serif' }}>
       <h1>할 일 목록</h1>
-      <div>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        addTodo();
+      }}>
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)} // 타이핑할 때마다 실행. setInput에 상태 반영
-          onKeyDown={(e) => e.key === 'Enter' && addTodo()} //Enter 시, addTodo 실행(A && B는 A가 참일 때만 B 실행)
+          //onKeyDown={(e) => e.key === 'Enter' && addTodo()} //Enter 시, addTodo 실행(A && B는 A가 참일 때만 B 실행)
           placeholder="할 일을 입력하세요"
         />
-        <button onClick={addTodo}>추가</button>
-      </div>
+        <button type="submit">추가</button>
+      </form>
       <ul style={{ listStyle: 'none', padding: 2 }}>
         {/* {todos.map((todo) => ( ... ))} 이거는 v-for="todo in todos" 와 동일 */}
         {todos.map((todo) => (
@@ -66,12 +71,18 @@ function App() { //하나의 컴포넌트 함수.
                 flex: 1,
               }}
             >
-              {todo.text} + {todo.id}
+              {todo.text}
             </span>
             <button onClick={() => deleteTodo(todo.id)}>삭제</button>
           </li>
         ))}
       </ul>
+
+      <div>
+        {todos.length === 0
+          ? '할 일을 등록해 주세요.'
+          : `남은 할 일 : ${finishCount}개 / 전체 : ${todos.length}개`}
+      </div>
     </div>
   );
 }
