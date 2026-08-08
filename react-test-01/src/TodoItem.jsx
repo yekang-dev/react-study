@@ -3,8 +3,13 @@
 // data.todo, data.onToggle ... 과 같은 형식으로 작성 안해도 됨. (구조분해할당:destructuring)
 function TodoItem({ todo, onToggle, onDelete }) {
   return (
+    // 부모 컴포넌트에서 리스트의 식별을 위한 key를 넣어주었으므로,
+    // <li>에서는 key를 작성해주지 않아도 됨.
     <li style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
       <span
+        // onClick 부분에서 onClick={toggleTodo}는 함수만 그냥 실행 (바로실행)
+        // 아래와 같이 화살표 함수로 감싸야, 특성 값(todo.id)인자를 넘겨줌 (방법만 작성해두고, 클릭시 실행)
+        // 인자를 넘겨야 하는 함수는 무조건 화살표 함수로 한번 감싸줘야 함.
         onClick={() => onToggle(todo.id)}
         style={{
           textDecoration: todo.done ? 'line-through' : 'none',

@@ -8,6 +8,7 @@ function App() { //하나의 컴포넌트 함수.
   // todos, input : 현재값 / setTodos, setInput : 값바꿀때 사용할 함수
   const [todos, setTodos] = useState([]); // 빈 배열로 시작 (할일 목록)
   const [input, setInput] = useState(''); // 빈 값으로 시작 (input 값)
+  const [btnType, setBtnType] = useState('all'); // 전체(all)가 기본값 (todo의 전체/진행/완료 값)
 
   // === Todo 추가 함수
   const addTodo = () => {
@@ -41,6 +42,20 @@ function App() { //하나의 컴포넌트 함수.
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+
+  // === Todo 목록 전체/진행중/완료 필터 기능 추가
+  // btnType의 값이 바뀔때 마다 새로 
+  // todos : Todo의 전체 목록
+  // btnTypeTodos : btnType의 값에 따라 filter 걸어서 전체/진행/완료 구분
+  // 전체 : todos 그대로 출력하면 되므로, return true
+  // 진행중 : todos에서 todo.done이 false인 값만 필터 (!todo.done)
+  // 완료 : todos에서 todo.done이 true인 값만 필터 (todo.done)
+  const btnTypeTodos = todos.filter((todo) => {
+    if (btnType === 'active') return !todo.done;
+    if (btnType === 'done') return todo.done;
+    return true; // 'all'
+  });
+
   return (
     <div style={{ maxWidth: 400, margin: '50px auto', fontFamily: 'sans-serif' }}>
       <h1>할 일 목록</h1>
@@ -56,8 +71,19 @@ function App() { //하나의 컴포넌트 함수.
         />
         <button type="submit">추가</button>
       </form>
+
+      {/* btnType 변수 값(전체/진행/완료 상태) 변경 */}
+      <div style={{ margin: '12px 0', display: 'flex', gap: 8 }}>
+        <button onClick={() => setBtnType('all')}
+          style={{ fontWeight: btnType === 'all' ? 'bold' : 'normal' }}>전체</button>
+        <button onClick={() => setBtnType('active')}
+          style={{ fontWeight: btnType === 'active' ? 'bold' : 'normal' }}>진행중</button>
+        <button onClick={() => setBtnType('done')}
+          style={{ fontWeight: btnType === 'done' ? 'bold' : 'normal' }}>완료</button>
+      </div>
+
       <ul style={{ listStyle: 'none', padding: 2 }}>
-        {todos.map((todo) => (
+        {btnTypeTodos.map((todo) => (
           // 컴포넌트 분리
           // 자식 컴포넌트(TodoItem.jsx) 불러오기.
           // todo(데이터), onToggle(로직), onDelete(로직) 이란 각 이라는 이름의 props 전달.
