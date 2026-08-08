@@ -17,6 +17,10 @@ function App() { //하나의 컴포넌트 함수.
   const [input, setInput] = useState(''); // 빈 값으로 시작 (input 값)
   const [btnType, setBtnType] = useState('all'); // 전체(all)가 기본값 (todo의 전체/진행/완료 값)
 
+
+
+
+
   // === Todo 추가 함수
   const addTodo = () => {
     if (input.trim() === '') return; //빈 칸이거나 공백 시, 함수 종료
@@ -29,6 +33,10 @@ function App() { //하나의 컴포넌트 함수.
     setInput(''); //입력창은 다시 초기화
   };
 
+
+
+
+
   // === 완료 체크 함수
   const toggleTodo = (id) => {
     // todos.map() : 할일 목록 배열 하나씩 전체 순회.
@@ -40,7 +48,9 @@ function App() { //하나의 컴포넌트 함수.
     );
   };
 
-  const finishCount = todos.filter((todo) => !todo.done).length;
+
+
+
 
   // === Todo 삭제 함수
   const deleteTodo = (id) => {
@@ -48,6 +58,31 @@ function App() { //하나의 컴포넌트 함수.
     // 삭제하려는 id 외 전부 남겨라.
     setTodos(todos.filter((todo) => todo.id !== id));
   };
+
+
+
+
+
+  // === Todo 수정 함수
+  const editTodo = (id, newText) => {
+    // todos 목록에서 동일한 id값을 가진 값을 찾아라. (아닐경우 그대로 데이터 유지)
+    // 찾아서 text를 새로 받아온 newText 값으로 데이터값을 변경해라.
+    setTodos(
+      todos.map((todo) =>
+        todo.id === id ? {...todo, text: newText } : todo
+      )
+    )
+  };
+
+
+
+
+
+  // === Todo 완료 갯수
+  const finishCount = todos.filter((todo) => !todo.done).length;
+
+
+
 
 
   // === Todo 목록 전체/진행중/완료 필터 기능 추가
@@ -63,6 +98,10 @@ function App() { //하나의 컴포넌트 함수.
     return true; // 'all'
   });
 
+
+
+
+
   // == Todo 목록 새로고침 해도 사라지지 않게 하는 기능 추가 (localStorage에 저장.)
   // todos의 값이 바뀔 때마다, 아래의 코드 실행
   // 두번째 인자(의존성배열)에 적힌 값이 바뀔때 마다 코드 실행.
@@ -70,6 +109,10 @@ function App() { //하나의 컴포넌트 함수.
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos)); // todos를 문자열로 바꿔 저장
   }, [todos]);
+
+
+
+
 
   return (
     <div style={{ maxWidth: 400, margin: '50px auto', fontFamily: 'sans-serif' }}>
@@ -109,6 +152,7 @@ function App() { //하나의 컴포넌트 함수.
             todo={todo}
             onToggle={toggleTodo}
             onDelete={deleteTodo}
+            onEdit={editTodo}
           />
         ))}
       </ul>
