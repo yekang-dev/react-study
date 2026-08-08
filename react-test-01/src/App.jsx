@@ -1,12 +1,19 @@
-import { useState } from 'react'; //hook. (컴포넌트 안에서 변하는 상태값.)
+import { useState, useEffect } from 'react'; //hook. (컴포넌트 안에서 변하는 상태값.)
 import TodoItem from './TodoItem'; // todoItem.jsx 파일 연결
 import './App.css';
 
 function App() { //하나의 컴포넌트 함수.
 
   // === 초기값 세팅
-  // todos, input : 현재값 / setTodos, setInput : 값바꿀때 사용할 함수
-  const [todos, setTodos] = useState([]); // 빈 배열로 시작 (할일 목록)
+  // todos, input, btnType : 현재값 / setTodos, setInput, setBtnType : 값바꿀때 사용할 함수
+  // >>>> const [todos, setTodos] = useState([]); // 빈 배열로 시작 (할일 목록) :: useEffect 사용 전
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem('todos'); // 브라우저의 localStorage에서 todos 키의 데이터 호출
+    // localStorage는 문자열만 저장함.
+    // JSON.stringify : 데이터를 문자열로 바꿈.
+    // JSON.parse : 데이터를 배열/객체로 되돌림.
+    return saved ? JSON.parse(saved) : [];
+  }); // 컴포넌트 처음 생성 시, 한번만 실행. (lazy 초기화. 최초 1회만 실행)
   const [input, setInput] = useState(''); // 빈 값으로 시작 (input 값)
   const [btnType, setBtnType] = useState('all'); // 전체(all)가 기본값 (todo의 전체/진행/완료 값)
 
@@ -55,6 +62,14 @@ function App() { //하나의 컴포넌트 함수.
     if (btnType === 'done') return todo.done;
     return true; // 'all'
   });
+
+  // == Todo 목록 새로고침 해도 사라지지 않게 하는 기능 추가 (localStorage에 저장.)
+  // todos의 값이 바뀔 때마다, 아래의 코드 실행
+  // 두번째 인자(의존성배열)에 적힌 값이 바뀔때 마다 코드 실행.
+  // 두번째 인자의 값 ([todos] : todos가 바뀔때마다 / [] : 컴포넌트가 처음 뜰때만 / 생략 : 렌더링때마다인데 잘안씀)
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos)); // todos를 문자열로 바꿔 저장
+  }, [todos]);
 
   return (
     <div style={{ maxWidth: 400, margin: '50px auto', fontFamily: 'sans-serif' }}>
