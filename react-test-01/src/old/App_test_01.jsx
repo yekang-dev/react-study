@@ -1,5 +1,4 @@
-import { useState } from 'react'; //hook. (컴포넌트 안에서 변하는 상태값.)
-import TodoItem from './TodoItem'; // todoItem.jsx 파일 연결
+import { useState } from 'react'; //hook. (컴포넌ㅌ트 안에서 변하는 상태값.)
 import './App.css';
 
 function App() { //하나의 컴포넌트 함수.
@@ -57,18 +56,25 @@ function App() { //하나의 컴포넌트 함수.
         <button type="submit">추가</button>
       </form>
       <ul style={{ listStyle: 'none', padding: 2 }}>
+        {/* {todos.map((todo) => ( ... ))} 이거는 v-for="todo in todos" 와 동일 */}
         {todos.map((todo) => (
-          // 컴포넌트 분리
-          // 자식 컴포넌트(TodoItem.jsx) 불러오기.
-          // todo(데이터), onToggle(로직), onDelete(로직) 이란 각 이라는 이름의 props 전달.
-          // [주의] key는 구별하는 용도로만 사용되어, 자식 컴포넌트에서 사용불가.
-          // todo.map 형식으로 돌고 있기 때문에 구별할 값이 필요하므로 반드시 작성 필요.
-          <TodoItem
-            key={todo.id}
-            todo={todo}
-            onToggle={toggleTodo}
-            onDelete={deleteTodo}
-          />
+          // key는 리스트의 식별자
+          <li key={todo.id} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <span
+              // onClick 부분에서 onClick={toggleTodo}는 함수만 그냥 실행 (바로실행)
+              // 아래와 같이 화살표 함수로 감싸야, 특성 값(todo.id)인자를 넘겨줌 (방법만 작성해두고, 클릭시 실행)
+              // 인자를 넘겨야 하는 함수는 무조건 화살표 함수로 한번 감싸줘야 함.
+              onClick={() => toggleTodo(todo.id)}
+              style={{
+                textDecoration: todo.done ? 'line-through' : 'none',
+                cursor: 'pointer',
+                flex: 1,
+              }}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => deleteTodo(todo.id)}>삭제</button>
+          </li>
         ))}
       </ul>
 
