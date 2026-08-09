@@ -15,9 +15,10 @@ AI 코딩 어시스턴트 워크플로우를 경험해보기 위한 실습
 3. AI가 생성한 코드 확인 및 실행
 
 ## 주요 기능
-- 할 일 추가
-- 할 일 삭제
+- 할 일 추가/수정/삭제
 - 할 일 완료 처리 (완료 시 하단으로 이동)
+- 전체 / 진행 / 완료 필터 (각 개수 표시)
+- localStorage 저장 (새로고침해도 목록 유지)
 
 ## 실행 방법
 \`\`\`bash
@@ -28,4 +29,20 @@ npm run dev
 ## 진행 기록
  - 2026-08-05: Claude Code를 통해 Vite로 React 프로젝트 생성
  - 2026-08-05: 자연어로 Todo 리스트 생성 및 수정 요청을 전달하고, AI가 JSX/CSS를 생성/수정하는 방식으로 진행
+- 2026-08-09: StrictMode가 상태를 두 번 호출해 id가 2씩 증가하는 현상을 발견, 원인 확인 후 id 발급을 업데이트 뒤로 옮김
+ - 2026-08-09: 필터 / 수정 / localStorage 저장 3가지를 한 번에 요청하고, 컴포넌트 분리 방식은 AI 판단에 맡김
+ - 2026-08-09: App.jsx 한 파일에서 TodoForm · TodoFilter · TodoList · TodoItem + storage.js 로 분리됨
+ - 2026-08-09: 새로고침 시, id가 1부터 다시 시작해 저장된 id와 충돌하는 문제를 AI가 먼저 짚어 목록의 최대 id 값의 +1 하도록 수정
 
+
+## 폴더 구조
+\`\`\`
+src/
+├── App.jsx              # 상태(todos, filter)와 로직
+├── storage.js           # localStorage 읽기/쓰기
+└── components/
+    ├── TodoForm.jsx     # 입력창 + 추가
+    ├── TodoFilter.jsx   # 전체/진행/완료 버튼
+    ├── TodoList.jsx     # 목록 렌더링
+    └── TodoItem.jsx     # 항목 1개 + 수정 모드
+\`\`\`

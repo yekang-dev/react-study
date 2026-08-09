@@ -26,6 +26,43 @@
   box-sizing: border-box;
 }
 
+/* 앱 안에서 쓰는 버튼 공통 모양 */
+.app button {
+  font: inherit;
+  font-size: 15px;
+  padding: 6px 12px;
+  color: var(--text-h);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+
+  &:hover {
+    border-color: var(--accent-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* 전체 / 진행 / 완료 필터 */
+.todo-filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+
+  /* 지금 선택된 필터만 강조 */
+  .selected {
+    color: var(--accent);
+    background: var(--accent-bg);
+    border-color: var(--accent-border);
+  }
+}
+
 .todo-form {
   display: flex;
   gap: 8px;
@@ -96,6 +133,44 @@
     color: var(--text);
     opacity: 0.6;
   }
+
+  /* 수정 / 삭제 버튼 묶음 */
+  .actions {
+    display: flex;
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+
+  /* 수정 모드일 때의 입력창 + 저장/취소 */
+  .edit-form {
+    display: flex;
+    width: 100%;
+    gap: 6px;
+
+    input {
+      flex: 1 1 auto;
+      min-width: 0;
+      font: inherit;
+      padding: 6px 10px;
+      color: var(--text-h);
+      background: var(--bg);
+      border: 1px solid var(--accent-border);
+      border-radius: 6px;
+
+      &:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+    }
+  }
+}
+
+/* 필터 결과가 비었을 때 */
+.empty {
+  text-align: left;
+  padding: 8px 0;
+  font-size: 15px;
+  opacity: 0.7;
 }
 
 .summary {
