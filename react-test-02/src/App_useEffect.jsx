@@ -3,12 +3,17 @@
 import { useState, useEffect } from 'react'
 import BookItem from './components/BookItem' // 검색 목록 컴포넌트
 
+const RESULT_PAGE = 10
+
 function App() {
   const [query, setQuery] = useState('') // 도서 검색 input
   const [books, setBooks] = useState([]) // 도서 목록
   const [loading, setLoading] = useState(false) // 도서 검색 로딩 flag
   const [error, setError] = useState(null) // 에러내용
 
+  // 페이징 추가
+  const [page, setPage] = useState(1) // 현재 페이지
+  const [total, setTotal] = useState(0) // 전체 데이터 갯수
 
 
 
@@ -25,6 +30,13 @@ function App() {
     // Google Books를 사용하기 위해서 발급한 API key를 .env(환경변수)에 저장하며 불러옴.
     const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
 
+
+    // ====> PageNation용. (10개씩 보일경우) startIndex=0&maxResults=10 → 1~10번째 (1페이지) / startIndex=10&maxResults=10 → 11~20번째 (2페이지)
+    // (20개씩 보일경우) startIndex=0&maxResults=20 → 1~20번째 (1페이지) / startIndex=20&maxResults=20 → 21~40번째 (2페이지)
+    const startIndex = (page - 1) * RESULT_PAGE
+  
+
+
     // ===> async, await
     // async 함수는 useEffect 직접 붙일 수 없다.
     // 따라서 아래와 같이 search라는 함수를 만들어서 호출하는 형식으로 진행.
@@ -40,7 +52,7 @@ function App() {
       try {
         // fetch : API 요청 보내고 응답 기다림.
         const response = await fetch(
-          `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}`
+          `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}&startIndex=${startIndex}&maxResults=${RESULT_PAGE}`
         );
 
         // fecth는 404, 500에러와 같은 HTTP에러 시, catch로 이동x
@@ -57,6 +69,10 @@ function App() {
         // 파싱한 값을 setBooks에 저장
         // google books는 검색결과가 없을 시, item 필드가 없어 undefined. 따라서 빈배열로 대체.
         setBooks(data.items || [])
+
+
+        // setTotal : 데이터 전체 갯수 세팅.
+        setTotal(data.totalItems || 0)
       } catch (err) {
         setError(err.message)
         setBooks([])
@@ -93,8 +109,12 @@ function App() {
       clearTimeout(timerId)
     }
 
-  }, [query]);
+  }, [query, page]);
 
+
+
+  // 페이징의 전체 갯수 계산 [(전체 데이터 / 화면에 보일 데이터 갯수)의 올림값]
+  const totalPages = Math.ceil(total / RESULT_PAGE)
 
 
 
@@ -119,6 +139,7 @@ function App() {
       )}
 
       {!loading && !error && books.length > 0 && (
+        <>
         <ul>
           {books.map((book) => (
             <BookItem
@@ -127,6 +148,15 @@ function App() {
             />
           ))}
         </ul>
+
+        <button onClick={() => setPage(page - 1)} disabled={page === 1}>
+          이전
+        </button>
+        <span>{page} / {totalPages}</span>
+        <button onClick={() => setPage(page + 1)} disabled={page >= totalPages}>
+          다음
+        </button>
+        </>
       )}
 
     </div>
