@@ -31,4 +31,4 @@ npm run dev
 - 2026-08-05: onKeyDown 방식을 form onSubmit 방식으로 변경, 남은/전체 개수 표시 추가
 - 2026-08-09: TodoItem 컴포넌트 분리(props), 필터링(전체/진행중/완료) 기능 추가
 - 2026-08-09: localStorage 저장 기능 추가(useEffect), 일정 수정기능 추가 (불필요한 태그 없이 묶는 Fragment(<></>) 알게됨)
-- 2026-08-12: localStorage 저장 기능 추가(useEffect), 일정 수정기능 추가 (불필요한 태그 없이 묶는 Fragment(<></>) 알게됨)
+- 2026-08-12: AI 코딩 어시스턴트 활용 프로젝트([react-test-ai-01](../react-test-ai-01))과 비교하여 위의 [react-test-ai-01와 비교 후 직접 적용해볼 것](#react-test-ai-01와-비교-후-직접-적용해볼-것) 작업 진행 (1~4 까지)
