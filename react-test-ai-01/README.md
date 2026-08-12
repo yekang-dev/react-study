@@ -21,10 +21,10 @@ AI 코딩 어시스턴트 워크플로우를 경험해보기 위한 실습
 - localStorage 저장 (새로고침해도 목록 유지)
 
 ## 실행 방법
-\`\`\`bash
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
 ## 진행 기록
  - 2026-08-05: Claude Code를 통해 Vite로 React 프로젝트 생성
@@ -36,7 +36,7 @@ npm run dev
 
 
 ## 폴더 구조
-\`\`\`
+```
 src/
 ├── App.jsx              # 상태(todos, filter)와 로직
 ├── storage.js           # localStorage 읽기/쓰기
@@ -45,4 +45,4 @@ src/
     ├── TodoFilter.jsx   # 전체/진행/완료 버튼
     ├── TodoList.jsx     # 목록 렌더링
     └── TodoItem.jsx     # 항목 1개 + 수정 모드
-\`\`\`
+```

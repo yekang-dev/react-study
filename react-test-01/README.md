@@ -12,10 +12,10 @@ React 기초 학습을 위해 직접 작성한 Todo List 앱
 - 할 일 완료 처리
 
 ## 실행 방법
-\`\`\`bash
+```bash
 npm install
 npm run dev
-\`\`\`
+```
 
 ## 진행 기록
 - 2026-08-05: Vite로 프로젝트 생성, useState로 Todo 추가/삭제/완료 기능 구현
