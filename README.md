@@ -13,6 +13,7 @@ React를 학습하며 진행한 실습 기록
 | [react-test-01](./react-test-01) | Todo List 앱 | 직접 구현(상태 관리) |
 | [react-test-02](./react-test-02) | 도서 검색 앱 | 직접 구현(API 연동) |
 | [react-test-ai-01](./react-test-ai-01) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 |
+| [react-test-ai-02](./react-test-ai-02) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 |
 
 ## 진행 예정
 - 상태 관리 심화
