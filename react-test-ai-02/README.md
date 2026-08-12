@@ -5,7 +5,9 @@ Google Books API를 이용한 도서 검색 웹
 
 직접 구현한 [react-test-02](../react-test-02)와 같은 주제로, 같은 기능을 AI가 어떻게 구성하는지 비교.
 
-  
+<br/>
+<br/>
+<br/>
 
 ## 사용 기술
 - React (Vite)
@@ -13,7 +15,9 @@ Google Books API를 이용한 도서 검색 웹
 - Google Books API
 - Claude Code (VS Code 확장)
 
-  
+<br/>
+<br/>
+<br/>
 
 ## 주요 기능
 - 검색 버튼 클릭 또는 Enter로 검색 (자동 검색 / 디바운스 없음)
@@ -22,8 +26,10 @@ Google Books API를 이용한 도서 검색 웹
 - 페이지네이션 (이전 · 페이지 번호 · 다음)
 - API 키 없이도 동작하고, .env에 키가 있으면 자동으로 사용
 
-  
-  
+<br/>
+<br/>
+<br/>
+
 ## 실행 방법
 
 ```bash
@@ -36,7 +42,9 @@ npm run dev
 VITE_GOOGLE_BOOKS_API_KEY=발급받은_키
 ```
 
-
+<br/>
+<br/>
+<br/>
 
 ## 폴더 구조
 ```
@@ -52,13 +60,13 @@ src/
     └── Pagination.jsx         # 이전 / 페이지 번호 / 다음
 ```
 
-
-
-
+<br/>
+<br/>
+<br/>
 
 ## AI 구현 메모
 
-### 버튼 · Enter 검색을 `<form>` 하나로 처리
+### - 버튼 · Enter 검색을 `<form>` 하나로 처리
 - 입력창을 `<form>`으로 감싸고 `onSubmit`에서 검색 실행 (버튼 클릭 및 Enter 기능 - `onKeyDown`으로 Enter를 따로 감지할 필요가 없음)
 - `event.preventDefault()`로 새로고침만 막아야함.
 
@@ -66,7 +74,7 @@ src/
 - `status`를 boolean이 아닌 `'idle' | 'loading' | 'error' | 'success'` 문자열 하나로 관리. (검색 전(`idle`)과 결과 0건(`success` + 빈 배열)을 명확히 구분)
 - boolean일 경우, "로딩 중이면서 에러" 같은 불가능한 조합이 생기고 JSX 조건문이 길어짐.
 
-### totalItems를 믿지 않는 페이지네이션
+### - totalItems를 믿지 않는 페이지네이션
 Google Books의 `totalItems`는 전체 개수가 아니라 추정치라서 페이지마다 값이 흔들린다.
 - 페이지 수는 **1페이지 응답의 `totalItems`로만** 계산하고, 이후 페이지에서는 갱신하지 않는다.
 - 최대 10페이지로 상한(`MAX_PAGES`)을 둔다.
@@ -74,14 +82,15 @@ Google Books의 `totalItems`는 전체 개수가 아니라 추정치라서 페�
 
 한계 : 이렇게 해도 표시되는 총 페이지 수는 추정치다. (위 [페이지네이션 정확도](#페이지네이션-정확도--둘-다-정확하지-않다) 참고)
 
-### 이전 요청 취소 (경쟁 상태 방지)
+### - 이전 요청 취소 (경쟁 상태 방지)
 페이지 버튼을 빠르게 여러 번 누르면 응답이 뒤바뀐 순서로 도착해
 나중에 누른 페이지가 먼저 그려질 수 있다.
 `AbortController`를 `useRef`에 보관해 새 요청 전에 이전 요청을 취소하고,
 `AbortError`는 사용자에게 보여줄 에러가 아니므로 무시한다.
 
-
-
+<br/>
+<br/>
+<br/>
 
 ## react-test-02와의 차이
 
@@ -139,7 +148,9 @@ Google Books의 전체데이터인 `totalItems`는 추정치. (이 API로 정확
 ai-02와의 차이를 확인하여 02 수정 필요.
 
 
-
+<br/>
+<br/>
+<br/>
 
 
 ## 진행 기록
