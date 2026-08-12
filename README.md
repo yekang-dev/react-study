@@ -6,14 +6,18 @@ React를 학습하며 진행한 실습 기록
 1. 직접 구현하며 React 기초 문법과 구조를 익히기
 2. AI 코딩 어시스턴트(Claude Code)에게 요구사항을 전달하고, 구현 및 워크플로우를 경험하기
 
+## 브랜치
+- main : AI 코딩 어시스턴트로 만든 프로젝트와 직접 구현한 프로젝트를 비교하여, 문제점 확인하고 최종적으로 완성한 브랜치
+- before-review : 직접 구현하며 React 기초 작업한 브랜치
+
 ## 프로젝트 목록
 
-| 폴더 | 내용 | 방식 |
-|---|---|---|
-| [react-test-01](./react-test-01) | Todo List 앱 | 직접 구현(상태 관리) |
-| [react-test-02](./react-test-02) | 도서 검색 앱 | 직접 구현(API 연동) |
-| [react-test-ai-01](./react-test-ai-01) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 |
-| [react-test-ai-02](./react-test-ai-02) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 |
+| 폴더 | 내용 | 방식 | 브랜치 |
+|---|---|---|---|
+| [react-test-01](./react-test-01) | Todo List 앱 | 직접 구현(상태 관리) | main, before-review 다름 |
+| [react-test-02](./react-test-02) | 도서 검색 앱 | 직접 구현(API 연동) | main, before-review 다름 |
+| [react-test-ai-01](./react-test-ai-01) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 | 브랜치 코드 동일 |
+| [react-test-ai-02](./react-test-ai-02) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 | 브랜치 코드 동일 |
 
 ## 진행 예정
 - ~~상태 관리 심화~~
