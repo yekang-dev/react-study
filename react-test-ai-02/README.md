@@ -7,7 +7,6 @@ Google Books API를 이용한 도서 검색 웹
 
 <br/>
 <br/>
-<br/>
 
 ## 사용 기술
 - React (Vite)
@@ -15,7 +14,6 @@ Google Books API를 이용한 도서 검색 웹
 - Google Books API
 - Claude Code (VS Code 확장)
 
-<br/>
 <br/>
 <br/>
 
@@ -26,7 +24,6 @@ Google Books API를 이용한 도서 검색 웹
 - 페이지네이션 (이전 · 페이지 번호 · 다음)
 - API 키 없이도 동작하고, .env에 키가 있으면 자동으로 사용
 
-<br/>
 <br/>
 <br/>
 
@@ -44,7 +41,6 @@ VITE_GOOGLE_BOOKS_API_KEY=발급받은_키
 
 <br/>
 <br/>
-<br/>
 
 ## 폴더 구조
 ```
@@ -60,7 +56,6 @@ src/
     └── Pagination.jsx         # 이전 / 페이지 번호 / 다음
 ```
 
-<br/>
 <br/>
 <br/>
 
@@ -88,7 +83,6 @@ Google Books의 `totalItems`는 전체 개수가 아니라 추정치라서 페�
 `AbortController`를 `useRef`에 보관해 새 요청 전에 이전 요청을 취소하고,
 `AbortError`는 사용자에게 보여줄 에러가 아니므로 무시한다.
 
-<br/>
 <br/>
 <br/>
 
@@ -148,7 +142,6 @@ Google Books의 전체데이터인 `totalItems`는 추정치. (이 API로 정확
 ai-02와의 차이를 확인하여 02 수정 필요.
 
 
-<br/>
 <br/>
 <br/>
 
