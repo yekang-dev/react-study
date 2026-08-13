@@ -22,7 +22,8 @@ npm run dev
 - [x] toggleTodo / deleteTodo / editTodo도 `setTodos((prev) => ...)` 형태로 통일
 - [x] 필터 버튼 3개를 배열 + map으로 정리
 - [x] TodoList 컴포넌트 분리 (App에서 map 걷어내기)
-- [ ] localStorage 읽기에 try/catch 추가 (저장값이 깨지면 앱이 멈춤)
+- [x] localStorage 읽기에 try/catch 추가 (저장값이 깨지면 앱이 멈춤)
+- [ ] localStorage 부분을 storage.js로 따로 분리하기 (컴포넌트 코드와 섞이지 않게 분리)
 - [ ] 수정 진입 시에도 editText를 현재 값으로 초기화
 - [ ] 필터 결과가 비었을 때 안내 문구 추가
 
