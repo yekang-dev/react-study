@@ -15,6 +15,15 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
     setIsEdit(false); // 수정모드를 다시 일반 모드로 변경
   };
 
+  // ==> (수정7) 수정 진입 시에도 editText를 현재 값으로 초기화
+  // 이전에 취소했던 값이 남아있지 않도록 항상 수정하기 전의 값에서 시작
+  // 이전에는 취소 버튼에 작업을 해주었는데, 다른 키를 눌러 취소하는 기능을 추가되면 전부 추가해줘야하는 문제 발생
+  // 처음부터 수정 버튼에 작업을 해두면 각각에 다 추가할 필요 없음.
+  const startEdit = () => {
+    setEditText(todo.text);
+    setIsEdit(true);
+  }
+
   return (
     // 부모 컴포넌트에서 리스트의 식별을 위한 key를 넣어주었으므로,
     // <li>에서는 key를 작성해주지 않아도 됨.
@@ -36,7 +45,7 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
           
           <button onClick={() => {
             // 수정하다 취소 시, 수정하던 값이 유지되어 원래값으로 초기화.
-            setEditText(todo.text); 
+            // setEditText(todo.text); 
             setIsEdit(false);}}>
               취소
           </button>
@@ -57,7 +66,7 @@ function TodoItem({ todo, onToggle, onDelete, onEdit }) {
             {todo.text}
           </span>
           
-          <button onClick={() => setIsEdit(true)}>수정</button>
+          <button onClick={startEdit}>수정</button>
           <button onClick={() => onDelete(todo.id)}>삭제</button>
         </>
       )}

@@ -5,6 +5,7 @@ import TodoItem from "./TodoItem";
 
 function TodoList({todos, onToggle, onDelete, onEdit}) {
 
+  // ==> (수정7) 필터 결과가 비었을 때 안내 문구 추가
   if (todos.length === 0) {
     return <p className="empty">표시할 할 일이 없습니다.</p>
   }

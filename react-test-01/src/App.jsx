@@ -2,31 +2,15 @@ import { useState, useEffect } from 'react'; //hook. (컴포넌트 안에서 변
 import TodoForm from './components/TodoForm'; // 검색 폼
 import TodoFilter from './components/TodoFilter'; // 검색 필터(전체/진행중/완료)
 import TodoList from './components/TodoList'; // 검색 목록
+import { loadTodos, saveTodos } from './storage' // localStorage 연결
 import './App.css';
 
 function App() { //하나의 컴포넌트 함수.
 
   // === 초기값 세팅
-  const [todos, setTodos] = useState(() => {
-    // 브라우저의 localStorage에서 이전 데이터 기록이 있으면 todos 키의 데이터 호출
-
-    // ==> (수정5) localStorage 읽기에 try/catch 추가 (저장값이 깨지면 앱이 멈춤)
-    // JSON.parse(saved)는 saved의 값이 올바른 JSON 형식이 아니면 에러.
-    // 따라서 에러가 날 경우를 대비하여 try-catch를 사용.
-    // catch에서는 빈배열로 세팅
-    try {
-      // 따라서, saved라는 변수에 localStorage에 todos의 데이터를 저장
-      // 데이터가 있으면, JSON.parse(saved), 없으면 빈 배열
-      const saved = localStorage.getItem('todos');
-      const parsed = saved ? JSON.parse(saved) : [];
-
-      // parsed가 배열이 아니면 무시(todos는 배열로 받아야함.)
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      // 값이 깨졌거나 저장소 접근이 막힌 경우, 빈 목록으로 시작
-      return [];
-    }
-  }); // 컴포넌트 처음 생성 시, 한번만 실행. (lazy 초기화. 최초 1회만 실행)
+  // localStorage에 저장된 목록을 읽는 부분.(storage.js로 분리, 모듈이 처음 불릴 때 딱 한 번)
+  const initialTodos = loadTodos();
+  const [todos, setTodos] = useState(initialTodos);
   const [btnType, setBtnType] = useState('all'); // 전체(all)가 기본값 (todo의 전체/진행/완료 값)
 
 
@@ -110,6 +94,7 @@ function App() { //하나의 컴포넌트 함수.
     return true; // 'all'
   })
   .sort((a, b) => Number(a.done) - Number(b.done));
+  // ==> (수정8) 완료 시, 할 일 하단으로 이동
   // filter에서 걸러낸 todos 배열의 데이터를 가지고 진행.
   // 비교함수 sort는 두 원소를 받아 숫자를 반환 하여 순서 정함.
   // a.done, b.done은 boolean으로 (false:0 / true:1)
@@ -124,14 +109,9 @@ function App() { //하나의 컴포넌트 함수.
   // todos의 값이 바뀔 때마다, 아래의 코드 실행
   // 두번째 인자(의존성배열)에 적힌 값이 바뀔때 마다 코드 실행.
   // 두번째 인자의 값 ([todos] : todos가 바뀔때마다 / [] : 컴포넌트가 처음 뜰때만 / 생략 : 렌더링때마다인데 잘안씀)
+  // localStorage 관련 코드는 storage.js에 이동.
   useEffect(() => {
-    // 올바른 JSON형식이 아니면, 오류가 남.(에러날 경우, 프로그램이 멈춤) 따라서 에러가 나도 진행할 수 있도록 try-catch
-    try {
-      localStorage.setItem('todos', JSON.stringify(todos)); // todos를 문자열로 바꿔 저장
-    } catch {
-      // 저장 실패 시에도 동작 진행.
-    }
-    
+    saveTodos(todos)    
   }, [todos]);
 
 
