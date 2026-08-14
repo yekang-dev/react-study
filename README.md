@@ -2,7 +2,7 @@
 React를 학습하며 진행한 실습 기록
 
 > 이 브랜치는 01번 프로젝트의 비교 전 시점
-> 최신 상태는 [main 브랜치](../../tree/main)를 확인
+> 최신 상태는 [main 브랜치](https://github.com/yekang-dev/react-study/tree/main)를 확인
 
 ## 학습 방식
 1. Claude와 대화형 학습을 통해 구현하며 React 기초 문법과 구조를 익히기
