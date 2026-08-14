@@ -1,25 +1,33 @@
 # React Study
-
 React를 학습하며 진행한 실습 기록
 
+> 이 브랜치는 01번 프로젝트의 비교 전 시점
+> 최신 상태는 [main 브랜치](../../tree/main)를 확인
+
 ## 학습 방식
-1. 직접 구현하며 React 기초 문법과 구조를 익히기
+1. Claude와 대화형 학습을 통해 구현하며 React 기초 문법과 구조를 익히기
 2. AI 코딩 어시스턴트(Claude Code)에게 요구사항을 전달하고, 구현 및 워크플로우를 경험하기
 
+1. 대화형 학습 — Claude와 대화형 학습을 통해 개념을 하나씩 확인하여 기초 문법과 구조를 익히며 코드를 작성하고, 이해한 내용은 주석으로 남김
+2. AI 코딩 어시스턴트(Claude Code)를 통해 바이브코딩으로 요구사항을 전달, 구현 및 워크플로우를 경험하는 형식으로 같은 기능을 다시 구현
+3. 두 코드를 비교해서 부족한 부분을 직접 수정
+
 ## 브랜치
-- main : AI 코딩 어시스턴트로 만든 프로젝트와 직접 구현한 프로젝트를 비교하여, 문제점 확인하고 최종적으로 완성한 브랜치
-- before-review : 직접 구현하며 React 기초 작업한 브랜치
+
+- `main` — 두 코드를 비교한 뒤 수정을 반영한 최종본
+- `initial/01-todo-list` — Todo 리스트 비교 전, 대화형 학습으로 작성한 초기 구현
+
+AI 구현본(`*-ai` 폴더)은 비교 기준이므로 두 브랜치에서 동일합니다.
 
 ## 프로젝트 목록
 
-| 폴더 | 내용 | 방식 | 브랜치 |
+| 폴더 | 내용 | 방식 |
 |---|---|---|---|
-| [react-test-01](./react-test-01) | Todo List 앱 | 직접 구현(상태 관리) | main, before-review 다름 |
-| [react-test-02](./react-test-02) | 도서 검색 앱 | 직접 구현(API 연동) | main, before-review 다름 |
-| [react-test-ai-01](./react-test-ai-01) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 | 브랜치 코드 동일 |
-| [react-test-ai-02](./react-test-ai-02) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 | 브랜치 코드 동일 |
+| [01-todo-list](./01-todo-list) | Todo List 앱 | 대화형 학습 (상태 관리) |
+| [01-todo-list-ai](./01-todo-list-ai) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 |
 
 ## 진행 예정
 - ~~상태 관리 심화~~
-- ~~API 연동~~
+- API 연동
+- 라우팅
 - 백엔드 연결 프로젝트

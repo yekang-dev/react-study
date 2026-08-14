@@ -1,6 +1,6 @@
-# React Todo List (직접 구현)
+# React Todo List (대화형 학습)
 
-React 기초 학습을 위해 직접 작성한 Todo List 앱
+React 기초 학습을 위해 대화형 학습을 통해 작성한 Todo List 앱
 
 ## 사용 기술
 - React
@@ -16,15 +16,6 @@ React 기초 학습을 위해 직접 작성한 Todo List 앱
 npm install
 npm run dev
 ```
-
-## react-test-ai-01와 비교 후 직접 적용해볼 것
-- [ ] 입력창 state를 App에서 TodoForm으로 옮기기 (타이핑할 때마다 전체 목록이 리렌더되는 문제)
-- [ ] toggleTodo / deleteTodo / editTodo도 `setTodos((prev) => ...)` 형태로 통일
-- [ ] 필터 버튼 3개를 배열 + map으로 정리
-- [ ] TodoList 컴포넌트 분리 (App에서 map 걷어내기)
-- [ ] localStorage 읽기에 try/catch 추가 (저장값이 깨지면 앱이 멈춤)
-- [ ] 수정 진입 시에도 editText를 현재 값으로 초기화
-- [ ] 필터 결과가 비었을 때 안내 문구 추가
 
 ## 진행 기록
 - 2026-08-05: Vite로 프로젝트 생성, useState로 Todo 추가/삭제/완료 기능 구현
