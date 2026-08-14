@@ -3,7 +3,7 @@
 React를 학습하며 진행한 실습 기록
 
 ## 학습 방식
-1. 직접 구현하며 React 기초 문법과 구조를 익히기
+1. Claude와 대화형 학습을 통해 구현하며 React 기초 문법과 구조를 익히기
 2. AI 코딩 어시스턴트(Claude Code)에게 요구사항을 전달하고, 구현 및 워크플로우를 경험하기
 
 ## 브랜치
@@ -14,12 +14,13 @@ React를 학습하며 진행한 실습 기록
 
 | 폴더 | 내용 | 방식 | 브랜치 |
 |---|---|---|---|
-| [react-test-01](./react-test-01) | Todo List 앱 | 직접 구현(상태 관리) | main, before-review 다름 |
-| [react-test-02](./react-test-02) | 도서 검색 앱 | 직접 구현(API 연동) | main, before-review 다름 |
+| [react-test-01](./react-test-01) | Todo List 앱 | 대화형 학습 구현(상태 관리) | main, before-review 다름 |
+| [react-test-02](./react-test-02) | 도서 검색 앱 | 대화형 학습 구현(API 연동) | main, before-review 다름 |
 | [react-test-ai-01](./react-test-ai-01) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 | 브랜치 코드 동일 |
 | [react-test-ai-02](./react-test-ai-02) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 | 브랜치 코드 동일 |
 
 ## 진행 예정
 - ~~상태 관리 심화~~
 - ~~API 연동~~
+- 라우팅
 - 백엔드 연결 프로젝트
