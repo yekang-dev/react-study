@@ -3,7 +3,7 @@
 Google Books API를 이용한 도서 검색 웹
 요구사항만 자연어로 전달하고 Claude Code가 구현한 두 번째 AI 실습 프로젝트
 
-직접 구현한 [react-test-02](../react-test-02)와 같은 주제로, 같은 기능을 AI가 어떻게 구성하는지 비교.
+대화형 학습으로 구현한 [02-book-list](../02-book-list)와 같은 주제로, 같은 기능을 AI가 어떻게 구성하는지 비교.
 
 <br/>
 
@@ -79,11 +79,11 @@ Google Books의 `totalItems`는 전체 개수가 아니라 추정치라서 페�
 
 <br/>
 
-## react-test-02와의 차이
+## 02-book-list와의 차이
 
-같은 기능을 직접 구현한 [react-test-02](../react-test-02)와 비교. (CSS 제외)
+같은 기능을 구현한 [02-book-list](../02-book-list)와 비교. (CSS 제외)
 
-| 항목 | react-test-02 | react-test-ai-02 |
+| 항목 | 02-book-list | 02-book-list-ai |
 |---|---|---|
 | 파일 구성 | `App.jsx` + `BookItem.jsx` (+ 학습용 `App_useEffect.jsx`) | `App.jsx` + `api/googleBooks.js` + 컴포넌트 5개 |
 | API 호출 위치 | `App.jsx` 안에서 직접 fetch | `api/googleBooks.js`로 분리 |

@@ -48,13 +48,13 @@ src/
 ```
 
 
-## react-test-01(직접 구현)과의 비교
+## 01-todo-list()과의 비교
 
-같은 기능의 Todo List를 직접 구현한 것과 AI에게 맡긴 것의 차이 정리.
+같은 기능의 Todo List를 구현한 것과 AI에게 맡긴 것의 차이 정리.
 
 ### 파일 구조
 ```
-react-test-01                react-test-ai-01
+01-todo-list                01-todo-list-ai
 src/                         src/
 ├── App.jsx                  ├── App.jsx
 └── TodoItem.jsx             ├── storage.js
@@ -67,7 +67,7 @@ src/                         src/
 
 ### 주요 차이
 
-| 항목 | react-test-01 (직접) | react-test-ai-01 (AI) |
+| 항목 | 01-todo-list (대화형 학습) | 01-todo-list-ai (AI) |
 |---|---|---|
 | 입력창 state 위치 | App이 보관 | TodoForm이 각자 보관 |
 | 컴포넌트 분리 | 항목(TodoItem)만 분리 | 폼 · 필터 · 목록 · 항목까지 분리 |
@@ -84,6 +84,6 @@ src/                         src/
 | 필터 결과가 비었을 때 | 안내 없음 | "표시할 할 일이 없습니다." |
 | 완료 항목 정렬 | 없음 | 완료 시 하단으로 이동 |
 
-### react-test-01이 더 나은 점
+### 01-todo-list이 더 나은 점
 - **lazy 초기화** — `useState(() => {...})`가 React 정석 방식. ai-01은 nextId 계산 때문에 모듈 밖에서 읽음.
 - **`Date.now()` id** — localStorage와 궁합이 좋아 새로고침 후 id 충돌 처리가 따로 필요 없음.

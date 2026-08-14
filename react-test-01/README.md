@@ -1,6 +1,6 @@
-# React Todo List (직접 구현)
+# React Todo List (대화형 학습)
 
-React 기초 학습을 위해 직접 작성한 Todo List 앱
+React 기초 학습을 위해 대화형 학습을 통해 작성한 Todo List 앱
 
 ## 사용 기술
 - React
@@ -17,7 +17,7 @@ npm install
 npm run dev
 ```
 
-## react-test-ai-01와 비교 후 직접 적용해볼 것
+## 01-todo-list-ai와 비교 후, 적용해볼 것
 - [x] 입력창 state를 App에서 TodoForm으로 옮기기 (타이핑할 때마다 전체 목록이 리렌더되는 문제)
 - [x] toggleTodo / deleteTodo / editTodo도 `setTodos((prev) => ...)` 형태로 통일
 - [x] 필터 버튼 3개를 배열 + map으로 정리
@@ -33,7 +33,7 @@ npm run dev
 - 2026-08-05: onKeyDown 방식을 form onSubmit 방식으로 변경, 남은/전체 개수 표시 추가
 - 2026-08-09: TodoItem 컴포넌트 분리(props), 필터링(전체/진행중/완료) 기능 추가
 - 2026-08-09: localStorage 저장 기능 추가(useEffect), 일정 수정기능 추가 (불필요한 태그 없이 묶는 Fragment(<></>) 알게됨)
-- 2026-08-12: AI 코딩 어시스턴트 활용 프로젝트([react-test-ai-01](../react-test-ai-01))과 비교하여 위의 [react-test-ai-01와 비교 후 직접 적용해볼 것](#react-test-ai-01와-비교-후-직접-적용해볼-것) 작업 진행 (1~4 까지)
+- 2026-08-12: AI 코딩 어시스턴트 활용 프로젝트([01-todo-list-ai](../01-todo-list-ai))과 비교하여 위의 [01-todo-list-ai와 비교 후, 적용해볼 것](#01-todo-list-ai와-비교-후,-적용해볼-것) 작업 진행 (1~4 까지)
 - 2026-08-13: 작업 진행 (5~8 까지) :: 이전까지는 AI와 동일하게 작업진행. 이번에는 AI 코드를 참고하여 필요한 함수만 수정 적용.
 
 
