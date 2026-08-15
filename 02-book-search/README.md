@@ -1,8 +1,7 @@
 # 도서 검색 앱 (Book Search App)
+
 Google Books API를 활용한 도서 검색 웹
 검색어를 입력하면 관련 도서 목록을 표지·저자·출판일 표출 및 페이지네이션 지원
-
-Vue.js 바탕으로 만든 두번째 React 프로젝트
 
 ## 사용 기술
 - React (Vite)
@@ -10,8 +9,8 @@ Vue.js 바탕으로 만든 두번째 React 프로젝트
 - Google Books API
 
 ## 주요 기능
-- 검색어 입력 시 자동 검색 (디바운스 적용, 0.5초)
-- 검색어 입력 시 버튼 검색 (2가지 방법 작업)
+- 검색어 입력 시 자동 검색 (useEffect) -> App_useEffect.jsx
+- 검색어 입력 시 버튼 검색 (이벤트 핸들러) -> App.jsx
 - 로딩 / 에러 / 검색 결과 없음 / 결과 표시 상태 처리
 - 도서 표지, 제목, 저자, 출판일 렌더링
 - API 키 환경변수(.env) 관리
@@ -32,14 +31,14 @@ VITE_GOOGLE_BOOKS_API_KEY=발급받은_키
 
 
 ## 진행 기록
-- 2026-08-10: Vite로 프로젝트 생성, components 폴더 미리 생성, useState로 검색 input(controlled component) 구현
+- 2026-08-10: Vite로 프로젝트 생성, components 폴더 미리 생성, useState로 검색 input 구현
 - 2026-08-10: fetch + async/await로 Google Books API 연동, 검색 결과 map으로 렌더링
 - 2026-08-10: useEffect 자동 검색 구현(의존성 배열 query), 디바운스 적용(setTimeout + cleanup으로 clearTimeout)
-- 2026-08-10: 로딩/에러/성공 상태 처리(try/catch/finally, response.ok 체크), BookItem 컴포넌트 분리(props, ?. 와 ??)
-- 2026-08-11: API 키 발급(Google Cloud Console), .env에 VITE_ 접두사로 저장(429 할당량 문제 해결)
-- 2026-08-11: 버튼 검색 방식으로 전환(useEffect 없이 이벤트 핸들러에서 직접 fetch), searched 상태로 검색 전 "결과 없음" 방지, Enter 검색 추가
+- 2026-08-10: 로딩/에러/성공 상태 처리(try/catch/finally, response.ok 체크), BookItem 컴포넌트 분리
+- 2026-08-11: API 키 발급, .env에 VITE_ 접두사로 저장(429 할당량 문제 해결)
+- 2026-08-11: 버튼 검색 방식으로 전환(useEffect 없이 이벤트 핸들러에서 직접 fetch), searchFlag 상태로 검색 전 "결과 없음" 방지, Enter 검색 추가
 - 2026-08-12: 페이지네이션 추가(startIndex/maxResults), useEffect 방식과 버튼 방식 둘 다 구현해봄
-- 2026-08-12: totalItems 신뢰성 문제 확인 → 응답 개수 기반으로 다음 페이지 판단하도록 변경
+- 2026-08-12: Google Books API의 totalItems 신뢰성 문제 확인 → 응답 개수 기반으로 다음 페이지 판단하도록 변경
 
 
 
