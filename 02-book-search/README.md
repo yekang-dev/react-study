@@ -8,6 +8,8 @@ Google Books API를 활용한 도서 검색 웹
 - JavaScript
 - Google Books API
 
+> 스타일(CSS)은 학습 범위가 아니므로 AI 구현본의 것을 그대로 사용함.
+
 ## 주요 기능
 - 검색어 입력 시 자동 검색 (useEffect) -> App_useEffect.jsx
 - 검색어 입력 시 버튼 검색 (이벤트 핸들러) -> App.jsx
