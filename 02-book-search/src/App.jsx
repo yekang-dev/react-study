@@ -9,9 +9,11 @@ const RESULT_PAGE = 10
 function App() {
   const [query, setQuery] = useState('') // 도서 검색 input
   const [books, setBooks] = useState([]) // 도서 목록
-  const [loading, setLoading] = useState(false) // 도서 검색 로딩 flag
-  const [error, setError] = useState(null) // 에러내용
-  const [searchFlag, setSearchFlag] = useState(false); // 검색 실행 flag (검색 결과용)
+
+  // ====(적용 2) 상태를 문자열 하나(status)로 통합 (StatusMessage) 
+  // 상태값 하나로 통일 및 메시지 내용
+  const [status, setStatus] = useState('stay') // 'stay' | 'loading' | 'error' | 'success'
+  const [message, setMessage] = useState('')
 
   // 페이징 추가
   const [page, setPage] = useState(1) // 현재 페이지
@@ -20,32 +22,30 @@ function App() {
 
 
   
-  // ===> 도서 검색 기능 (Google Books API 연결)
+  // ===> 도서 API 조회 기능 (Google Books API 연결)
   // ===> async, await
   // query : 검색어, pageNum : 페이지 번호
   const search = async (query, pageNum) => {
 
-    setLoading(true) // 검색 시, 로딩 활성화
-    setError(null) // 검색 시, 기존 에러는 null
-    setSearchFlag(true) //검색 실행 표시
-
+    setStatus('loading');
+    setMessage('');
 
     // ===> 로딩/에러/성공 상태 처리를 위한 try-catch-finally
     // API 호출(fetch)는 실패하는 경우도 있으므로, 실패를 잡기 위해 try-catch
     // googleBookApi.js와 연결
-    // finally는 성공 실패 상관없이 실행. 로딩을 끄기 위해 사용
     try {
       const result = await googleBookApi(query, pageNum);
       
+      setStatus('success')
       setBooks(result.books);
       setTotal(result.total);
 
     } catch (error) {
-      setError(error.message)
+      setStatus('error')
+      setMessage(error.message)
+
       setBooks([])
       setTotal(0)
-    } finally {
-      setLoading(false)
     }
 
   }
@@ -60,7 +60,7 @@ function App() {
     if (query === '') {
       return;
     }
-
+    
     // page 1로 초기화
     setPage(1)
     // 검색값 + 페이지 1로 세팅
@@ -113,16 +113,16 @@ function App() {
       />
       <button onClick={searchBtn}>검색</button>
       
-      {loading && <p>검색 중...</p>}
-      {error && <p>에러: {error}</p>}
-      {!loading && !error && <p>검색 결과: {books.length}건</p>}
+      
+      {status === 'stay' && <p>검색어를 입력해주세요.</p>}
+      {status === 'loading' && <p>검색 중...</p>}
+      {status === 'error' && <p>에러: {message}</p>}
+      {status === 'success' && books.length === 0 && <p>검색 결과가 없습니다.</p>}
 
-      {!loading && !error && books.length === 0 && searchFlag && (
-        <p>검색 결과가 없습니다.</p>
-      )}
-
-      {!loading && !error && books.length > 0 && (
+      {status === 'success' && books.length > 0 && (
         <>
+        <p>검색 결과: {books.length}건</p>
+
         <ul>
           {books.map((book) => (
             <BookItem
@@ -131,6 +131,7 @@ function App() {
             />
           ))}
         </ul>
+        
         <div className="pagination">
           <button onClick={pagePrev} disabled={page === 1}>
             이전

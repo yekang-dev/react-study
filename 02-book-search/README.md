@@ -13,7 +13,8 @@ Google Books API를 활용한 도서 검색 웹
 ## 주요 기능
 - 검색어 입력 시 자동 검색 (useEffect) -> App_useEffect.jsx
 - 검색어 입력 시 버튼 검색 (이벤트 핸들러) -> App.jsx
-- 로딩 / 에러 / 검색 결과 없음 / 결과 표시 상태 처리
+- 로딩 / 에러 / 검색 결과 없음 / 결과 표시 상태 처리 (status 문자열 하나로 관리)
+- API 호출 로직 분리 (api/googleBookApi.js)
 - 도서 표지, 제목, 저자, 출판일 렌더링
 - API 키 환경변수(.env) 관리
 - 페이지네이션 (이전 / 다음)
@@ -41,6 +42,7 @@ VITE_GOOGLE_BOOKS_API_KEY=발급받은_키
 - 2026-08-11: 버튼 검색 방식으로 전환(useEffect 없이 이벤트 핸들러에서 직접 fetch), searchFlag 상태로 검색 전 "결과 없음" 방지, Enter 검색 추가
 - 2026-08-12: 페이지네이션 추가, useEffect 방식과 버튼 방식 둘 다 구현해봄
 - 2026-08-12: Google Books API의 totalItems 신뢰성 문제 확인 (미해결)
+- 2026-08-18: API 호출 로직을 googleBookApi.js로 분리(URLSearchParams 적용), 로딩/에러 상태를 status 하나로 통합
 
 
 
@@ -116,8 +118,8 @@ Claude Code에 두 폴더 비교를 요청해 개선점 목록을 받아 발견�
 
 ## 02-book-search-ai와 비교 후, 적용해볼 것
 - [x] fetch 로직을 api 폴더로 분리 (URLSearchParams 사용)
+- [x] 상태를 문자열 하나(status)로 통합 (StatusMessage)
 - [ ] 컴포넌트 분리 (SearchForm / BookList / StatusMessage / Pagination)
-- [ ] 상태를 문자열 하나(status)로 통합 (StatusMessage)
 - [ ] 검색어 trim 처리
 - [ ] volumeInfo 없는 경우 방어
 - [ ] 429 에러 별도 문구 처리
