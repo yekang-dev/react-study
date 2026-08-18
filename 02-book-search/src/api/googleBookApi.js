@@ -22,7 +22,7 @@ export async function googleBookApi (query, pageNum) {
     {
       q: query, // 검색값
       key: API_KEY, // api key
-      startIndex: pageNum, 
+      startIndex: startIndex, 
       maxResults: RESULT_PAGE
     }
   );
