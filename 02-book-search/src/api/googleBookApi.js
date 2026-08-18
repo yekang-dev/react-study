@@ -21,11 +21,18 @@ export async function googleBookApi (query, pageNum) {
   const params = new URLSearchParams(
     {
       q: query, // 검색값
-      key: API_KEY, // api key
       startIndex: startIndex, 
       maxResults: RESULT_PAGE
     }
   );
+
+  // ====(적용 8) API 키 없을 때도 동작하도록 처리 (key 파라미터 조건부 추가)
+  // Google Books API는 key값이 없어도 작동가능 하므로, 선택사항으로 아래와 같이 코드 삽입.
+  // 하지만 요청 할당량(429)이 낮아 실패할 경우를 대비해 .env에 key값이 설정하는 것이 좋음.
+  if(API_KEY){
+    params.append('key', API_KEY);
+  }
+
   const url = `https://www.googleapis.com/books/v1/volumes?${params}`;
   
   // fetch : API 요청 보내고 응답 기다림.
@@ -33,8 +40,11 @@ export async function googleBookApi (query, pageNum) {
 
   // fecth는 404, 500에러와 같은 HTTP에러 시, catch로 이동x
   // 사유 : 응답을 받긴 했으므로 성공처리
-  // response.ok (상태 코드 200) 확인하여 throw로 던저 catch로 보냄.
+  // response.ok (상태 코드 200번대) true. 실패 false일 경우 throw로 던져 catch로 보냄.
   if (!response.ok) {
+    if(response.status === 429){
+      throw new Error('요청이 많아 잠시 후에 다시 시도해주세요.')
+    }
     throw new Error('요청에 실패했습니다.')
   }
 
