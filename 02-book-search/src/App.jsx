@@ -1,6 +1,7 @@
 // =====> 도서 검색 버튼용 (이쪽이 일반적)
 
 import { useState } from 'react'
+import { googleBookApi } from './api/googleBookApi'
 import BookItem from './components/BookItem' // 검색 목록 컴포넌트
 
 const RESULT_PAGE = 10
@@ -19,27 +20,10 @@ function App() {
 
 
   
-  // ===> 도서 검색 시, 버튼이나 엔터 검색 기능
+  // ===> 도서 검색 기능 (Google Books API 연결)
   // ===> async, await
-  // async 함수는 useEffect 직접 붙일 수 없다.
-  // 따라서 아래와 같이 search라는 함수를 만들어서 호출하는 형식으로 진행.
-  // ======> pageNation 추가로 버튼 클릭시 (X), page 인자를 받고 API 호출 하는 형식으로 변경
   // query : 검색어, pageNum : 페이지 번호
   const search = async (query, pageNum) => {
-    // 검색 값이 비어있을땐, 아무것도 검색x
-    // ======> pageNation 추가로 위치 이동
-    // if (query === '') {
-    //   return;
-    // }
-
-    // Google Books를 사용하기 위해서 발급한 API key를 .env(환경변수)에 저장하며 불러옴.
-    const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY
-
-
-    // ====> PageNation용. (10개씩 보일경우) startIndex=0&maxResults=10 → 1~10번째 (1페이지) / startIndex=10&maxResults=10 → 11~20번째 (2페이지)
-    // (20개씩 보일경우) startIndex=0&maxResults=20 → 1~20번째 (1페이지) / startIndex=20&maxResults=20 → 21~40번째 (2페이지)
-    const startIndex = (pageNum - 1) * RESULT_PAGE
-  
 
     setLoading(true) // 검색 시, 로딩 활성화
     setError(null) // 검색 시, 기존 에러는 null
@@ -48,34 +32,16 @@ function App() {
 
     // ===> 로딩/에러/성공 상태 처리를 위한 try-catch-finally
     // API 호출(fetch)는 실패하는 경우도 있으므로, 실패를 잡기 위해 try-catch
+    // googleBookApi.js와 연결
     // finally는 성공 실패 상관없이 실행. 로딩을 끄기 위해 사용
     try {
-      // fetch : API 요청 보내고 응답 기다림.
-      // google books 페이징 ( startIndex : 몇번째부터 가져올지 / maxResults : 한번에 보여줄 데이터 갯수 - 기본 10개, 최대 40개 )
-      const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${query}&key=${API_KEY}&startIndex=${startIndex}&maxResults=${RESULT_PAGE}`
-      );
+      const result = await googleBookApi(query, pageNum);
+      
+      setBooks(result.books);
+      setTotal(result.total);
 
-      // fecth는 404, 500에러와 같은 HTTP에러 시, catch로 이동x
-      // 사유 : 응답을 받긴 했으므로 성공처리
-      // response.ok (상태 코드 200) 확인하여 throw로 던저 catch로 보냄.
-      if (!response.ok) {
-        throw new Error('요청에 실패했습니다.')
-      }
-
-      // response.json() : 응답 값을 JSON으로 파싱 (비동기이므로 await 필요)
-      const data = await response.json()
-      console.log('data', data);
-
-      // 파싱한 값을 setBooks에 저장
-      // google books는 검색결과가 없을 시, item 필드가 없어 undefined. 따라서 빈배열로 대체.
-      setBooks(data.items || [])
-
-      // setTotal : 데이터 전체 갯수 세팅.
-      setTotal(data.totalItems || 0)
-
-    } catch (err) {
-      setError(err.message)
+    } catch (error) {
+      setError(error.message)
       setBooks([])
       setTotal(0)
     } finally {

@@ -115,7 +115,7 @@ Claude Code에 두 폴더 비교를 요청해 개선점 목록을 받아 발견�
 
 
 ## 02-book-search-ai와 비교 후, 적용해볼 것
-- [ ] fetch 로직을 api 폴더로 분리 (URLSearchParams 사용)
+- [x] fetch 로직을 api 폴더로 분리 (URLSearchParams 사용)
 - [ ] 컴포넌트 분리 (SearchForm / BookList / StatusMessage / Pagination)
 - [ ] 상태를 문자열 하나(status)로 통합 (StatusMessage)
 - [ ] 검색어 trim 처리
