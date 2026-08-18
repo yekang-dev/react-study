@@ -42,8 +42,8 @@ VITE_GOOGLE_BOOKS_API_KEY=발급받은_키
 - 2026-08-11: 버튼 검색 방식으로 전환(useEffect 없이 이벤트 핸들러에서 직접 fetch), searchFlag 상태로 검색 전 "결과 없음" 방지, Enter 검색 추가
 - 2026-08-12: 페이지네이션 추가, useEffect 방식과 버튼 방식 둘 다 구현해봄
 - 2026-08-12: Google Books API의 totalItems 신뢰성 문제 확인 (미해결)
-- 2026-08-18: API 호출 로직을 googleBookApi.js로 분리(URLSearchParams 적용), 로딩/에러 상태를 status 하나로 통합
-
+- 2026-08-18: AI 구현본과 비교 후 적용 시작. API 호출 로직을 api/googleBookApi.js로 분리(URLSearchParams로 쿼리 조립), 로딩/에러/검색여부 상태를 status 문자열 하나로 통합
+- 2026-08-18: 검색 영역을 form(onSubmit) 방식으로 변경, 검색어 trim 처리, volumeInfo 없는 응답 방어, 검색 전 안내 문구 추가
 
 
 ## 트러블슈팅
@@ -119,10 +119,11 @@ Claude Code에 두 폴더 비교를 요청해 개선점 목록을 받아 발견�
 ## 02-book-search-ai와 비교 후, 적용해볼 것
 - [x] fetch 로직을 api 폴더로 분리 (URLSearchParams 사용)
 - [x] 상태를 문자열 하나(status)로 통합 (StatusMessage)
-- [ ] 컴포넌트 분리 (SearchForm / BookList / StatusMessage / Pagination)
-- [ ] 검색어 trim 처리
-- [ ] volumeInfo 없는 경우 방어
+- [x] 검색 영역을 form으로 감싸기 (onSubmit 방식)
+- [x] 검색어 trim 처리
+- [x] volumeInfo 없는 경우 방어
+- [x] 검색 전 초기 안내 문구 추가
 - [ ] 429 에러 별도 문구 처리
 - [ ] 표지 이미지 없을 때 '표지 없음' 표기
-- [ ] 검색 전 초기 안내 문구 추가
+- [ ] 컴포넌트 분리 (SearchForm / BookList / StatusMessage / Pagination)
 - [ ] 페이지네이션을 번호 나열 방식으로 변경 (pageCount 재계산 버그 문제 포함)

@@ -54,17 +54,17 @@ function App() {
 
 
 
+  // ====(적용 4) 검색어 trim 처리
   // 검색 버튼 : 검색버튼 클릭 시, 1페이지 부터
-  const searchBtn = () => {
-    // 검색 비어있을 경우 빈값 return
-    if (query === '') {
-      return;
-    }
+  const searchBtn = (e) => {
+    e.preventDefault(); // form 새로고침 막기
+    const text = query.trim(); // 앞, 뒤 공백 처리
+    if(!text) return; // 값이 없으면 그냥 return (반응 x)
     
     // page 1로 초기화
     setPage(1)
     // 검색값 + 페이지 1로 세팅
-    search(query, 1)
+    search(text, 1)
   }
 
 
@@ -99,21 +99,20 @@ function App() {
   return (
     <div>
       <h1>도서 검색</h1>
-      <input
-        type="text"
-        // value, onChange 한세트로 해야 양방향 바인딩이 된다. (잊지말기)
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            searchBtn()
-          }
-        }}
-        placeholder="책 제목을 입력하세요"
-      />
-      <button onClick={searchBtn}>검색</button>
+      {/* ====(적용 3) 검색 영역을 form으로 감싸기 (onSubmit 방식) */}
+      <form onSubmit={searchBtn}>
+        <input
+          type="text"
+          // value, onChange 한세트로 해야 양방향 바인딩이 된다. (잊지말기)
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="책 제목을 입력하세요"
+        />
+        <button type="submit">검색</button>
+      </form>
       
       
+      {/* ====(적용 6) 검색 전 초기 안내 문구 추가  */}
       {status === 'stay' && <p>검색어를 입력해주세요.</p>}
       {status === 'loading' && <p>검색 중...</p>}
       {status === 'error' && <p>에러: {message}</p>}

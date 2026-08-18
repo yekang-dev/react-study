@@ -1,7 +1,9 @@
 function BookItem({ book }) {
+
+  // ====(적용 5) volumeInfo 없는 경우 방어
   // 구조 분해 할당(destructuring assignment)
   // book.volumeInfo 객체 안에서 필요한 속성만 꺼내서 변수로 만듬.
-  const { title, authors, publishedDate, imageLinks } = book.volumeInfo
+  const { title, authors, publishedDate, imageLinks } = book.volumeInfo ?? {}
 
   return (
     <li>
