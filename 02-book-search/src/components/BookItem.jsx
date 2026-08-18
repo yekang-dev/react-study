@@ -5,7 +5,6 @@ function BookItem({ book }) {
   // book.volumeInfo 객체 안에서 필요한 속성만 꺼내서 변수로 만듬.
   const { title, authors, publishedDate, imageLinks } = book.volumeInfo ?? {}
 
-  console.info("imageLinks", imageLinks?.thumbnail);
   return (
     <li>
       {/* imageLinks?. => ?.(옵셔널 체이닝) imageLinks라는 필드가 아예 없을 경우, undefined로 오류가 뜸.

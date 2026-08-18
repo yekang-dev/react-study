@@ -46,6 +46,7 @@ VITE_GOOGLE_BOOKS_API_KEY=발급받은_키
 - 2026-08-18: AI 구현본과 비교 후 적용 시작. API 호출 로직을 api/googleBookApi.js로 분리(URLSearchParams로 쿼리 조립), 로딩/에러/검색여부 상태를 status 문자열 하나로 통합
 - 2026-08-18: 검색 영역을 form(onSubmit) 방식으로 변경, 검색어 trim 처리, volumeInfo 없는 응답 방어, 검색 전 안내 문구 추가
 - 2026-08-18: 429(할당량 초과) 에러 별도 문구 처리, API 키 없이도 동작하도록 key 파라미터 조건부 추가, 표지 이미지 없을 때 '표지 없음' 표기
+- 2026-08-19 : 컴포넌트(SearchForm / BookList / StatusMessage / Pagination) 분리 작업
 
 
 ## 트러블슈팅
@@ -128,5 +129,5 @@ Claude Code에 두 폴더 비교를 요청해 개선점 목록을 받아 발견�
 - [x] 429 에러 별도 문구 처리
 - [x] API 키 없을 때도 동작하도록 처리 (key 파라미터 조건부 추가)
 - [x] 표지 이미지 없을 때 '표지 없음' 표기
-- [ ] 컴포넌트 분리 (SearchForm / BookList / StatusMessage / Pagination)
+- [x] 컴포넌트 분리 (SearchForm / BookList / StatusMessage / Pagination)
 - [ ] 페이지네이션을 번호 나열 방식으로 변경 (pageCount 재계산 버그 문제 포함)

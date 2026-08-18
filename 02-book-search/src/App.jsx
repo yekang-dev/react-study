@@ -1,8 +1,11 @@
 // =====> 도서 검색 버튼용 (이쪽이 일반적)
 
 import { useState } from 'react'
-import { googleBookApi } from './api/googleBookApi'
-import BookItem from './components/BookItem' // 검색 목록 컴포넌트
+import { googleBookApi } from './api/googleBookApi' // Google Books API 연결
+import SearchForm from './components/SearchForm' // 검색 폼 컴포넌트
+import BookList from './components/BookList' // 검색 목록 컴포넌트
+import StatusMessage from './components/StatusMessage' // 상태 컴포넌트
+import Pagination from './components/Pagination' // 페이지네이션 컴포넌트
 
 const RESULT_PAGE = 10
 
@@ -54,12 +57,10 @@ function App() {
 
 
 
-  // ====(적용 4) 검색어 trim 처리
   // 검색 버튼 : 검색버튼 클릭 시, 1페이지 부터
-  const searchBtn = (e) => {
-    e.preventDefault(); // form 새로고침 막기
-    const text = query.trim(); // 앞, 뒤 공백 처리
-    if(!text) return; // 값이 없으면 그냥 return (반응 x)
+  const searchBtn = (text) => {
+
+    setQuery(text);
     
     // page 1로 초기화
     setPage(1)
@@ -95,51 +96,26 @@ function App() {
   const totalPages = Math.ceil(total / RESULT_PAGE)
 
 
-  
   return (
     <div>
       <h1>도서 검색</h1>
-      {/* ====(적용 3) 검색 영역을 form으로 감싸기 (onSubmit 방식) */}
-      <form onSubmit={searchBtn}>
-        <input
-          type="text"
-          // value, onChange 한세트로 해야 양방향 바인딩이 된다. (잊지말기)
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="책 제목을 입력하세요"
-        />
-        <button type="submit">검색</button>
-      </form>
       
+      <SearchForm onSearch={searchBtn} />
       
-      {/* ====(적용 6) 검색 전 초기 안내 문구 추가  */}
-      {status === 'stay' && <p>검색어를 입력해주세요.</p>}
-      {status === 'loading' && <p>검색 중...</p>}
-      {status === 'error' && <p>에러: {message}</p>}
-      {status === 'success' && books.length === 0 && <p>검색 결과가 없습니다.</p>}
+      <StatusMessage status={status} message={message} isEmpty={books.length === 0} />
 
       {status === 'success' && books.length > 0 && (
         <>
-        <p>검색 결과: {books.length}건</p>
-
-        <ul>
-          {books.map((book) => (
-            <BookItem
-              key={book.id}
-              book={book}
-            />
-          ))}
-        </ul>
-        
-        <div className="pagination">
-          <button onClick={pagePrev} disabled={page === 1}>
-            이전
-          </button>
-          <span>{page} / {totalPages}</span>
-          <button onClick={pageNext} disabled={page >= totalPages}>
-            다음
-          </button>
-        </div>
+          <p>검색 결과: {books.length}건</p>
+          
+          <BookList books={books} />
+          
+          <Pagination
+            pagePrev={pagePrev}
+            pageNext={pageNext}
+            page={page}
+            totalPages={totalPages}
+          />
         </>
       )}
 
