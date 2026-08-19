@@ -5,7 +5,8 @@
 const API_KEY = import.meta.env.VITE_GOOGLE_BOOKS_API_KEY;
 
 // 화면에 보일 데이터 갯수 (최대 40개 - googleBook에서 지정)
-const RESULT_PAGE = 10;
+// App.jsx에서 페이징 계산할 때도 사용하므로 export로 변경
+export const RESULT_PAGE = 10;
 
 // API 호출
 export async function googleBookApi (query, pageNum) {
