@@ -6,6 +6,7 @@ import SearchForm from './components/SearchForm' // 검색 폼 컴포넌트
 import BookList from './components/BookList' // 검색 목록 컴포넌트
 import StatusMessage from './components/StatusMessage' // 상태 컴포넌트
 import Pagination from './components/Pagination' // 페이지네이션 컴포넌트
+import './App.css'
 
 function App() {
   const [query, setQuery] = useState('') // 도서 검색 input
@@ -81,8 +82,11 @@ function App() {
 
 
   return (
-    <div>
-      <h1>도서 검색</h1>
+    <main className="app">
+      <header className="app-header">
+        <h1 className="app-title">도서 검색</h1>
+        <p className="app-desc">Google Books API로 책을 검색합니다.</p>
+      </header>
       
       <SearchForm onSearch={searchBtn} />
       
@@ -90,7 +94,7 @@ function App() {
 
       {status === 'success' && books.length > 0 && (
         <>
-          <p>검색 결과: {books.length}건</p>
+          <p className="result-info">검색 결과 · {books.length}건</p>
           
           <BookList books={books} />
           
@@ -102,7 +106,7 @@ function App() {
         </>
       )}
 
-    </div>
+    </main>
   )
 }
 

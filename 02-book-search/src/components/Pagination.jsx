@@ -20,23 +20,35 @@ function Pagination ({onPageChange, page, totalPages}) {
   }
 
   return (
-    <div className="pagination">
-      <button onClick={() => onPageChange(page-1)} disabled={page === 1}>
+    <nav className="pagination">
+      <button type="button"
+        className="page-button"
+        onClick={() => onPageChange(page-1)}
+        disabled={page === 1}
+      >
         이전
       </button>
       {pageNumList.map((num) => (
         <button
           key={num}
           type="button"
+          className={
+            num === page ? 'page-button page-button-current' : 'page-button'
+          }
           onClick={() => onPageChange(num)}
           disabled={num === page}>
             {num}
         </button>
       ))}
-      <button onClick={() => onPageChange(page+1)} disabled={page >= totalPages}>
+      <button
+        type="button"
+        className="page-button"
+        onClick={() => onPageChange(page+1)}
+        disabled={page >= totalPages}
+      >
         다음
       </button>
-    </div>
+    </nav>
   )
 
 }

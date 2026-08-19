@@ -3,7 +3,7 @@ import BookItem from "./BookItem"
 
 function BookList ({books}) {
   return (
-    <ul>
+    <ul className="book-list">
       {books.map((book) => (
         <BookItem
           key={book.id}

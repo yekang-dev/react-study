@@ -17,15 +17,16 @@ function SearchForm({onSearch}){
 
   return (
     // ====(적용 3) 검색 영역을 form으로 감싸기 (onSubmit 방식)
-    <form onSubmit={search}>
+    <form className="search-form" onSubmit={search}>
       <input
+        className="search-input"
         type="text"
         // value, onChange 한세트로 해야 양방향 바인딩이 된다. (잊지말기)
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="책 제목을 입력하세요"
       />
-      <button type="submit">검색</button>
+      <button className="search-button" type="submit">검색</button>
     </form>
   )
 }
