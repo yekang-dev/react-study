@@ -1,120 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { Routes, Route, Navigate } from "react-router"
+import Login from './pages/Login'
+import TopMenu from './layouts/TopMenu'
+import Dashboard from './pages/Dashboard'
+import NoticeList from './pages/notice/NoticeList'
+import UserList from './pages/user/UserList'
+import NotFound from "./pages/NotFound"
 
+// App.jsx : 실제 화면 구조를 그리는 곳.
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      <Routes>
 
-      <div className="ticks"></div>
+        {/* path : url 경로
+        element : path 경로일 때, 연결해줄 화면(JSX) */}
+        <Route path="/login" element={<Login/>}/>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        {/* Navigate : 화면을 그리지 않고, 랜더링 순간 다른 주소 (to의 경로)로 이동 */}
+        {/* replace : 히스토리 덮어 씌우기.
+        - /로 입력했다가 /admin 으로 이동하면, /와 /admin이 기록에 남음
+        - replace를 작성하면 /의 히스토리가 /admin으로 덮어 씌워져 /admin만 남음 */}
+        <Route path="/" element={<Navigate  to="/admin" replace />} />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+        {/* url 중첩 (/admin이 부모, 그 안의 값이 자식) */}
+        <Route path="/admin" element={<TopMenu/>}>
+          {/* index : 부모 경로에 정확히(뒤에 자식 없이) 들어올 경우, 보여지는 화면 표시 */}
+          <Route index element={<Navigate to="dashboard" replace />} />
+          <Route path="dashboard" element={<Dashboard/>}/>
+          <Route path="notice" element={<NoticeList/>}/>
+          <Route path="user" element={<UserList/>}/>
+        </Route>
+        {/* 위의 어느 것에도 안 걸린 나머지의 경로로 접근 시 */}
+        <Route path="*" element={<NotFound />} />
+
+      </Routes>
     </>
   )
 }
