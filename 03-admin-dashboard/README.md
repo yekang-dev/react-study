@@ -31,8 +31,8 @@ npm run dev
 - 2026-08-19: 프로젝트 세팅 (Vite + React), react-router 설치
 - 2026-08-20: 라우트 구조 설계 (라우트 표 작성)
 - 2026-08-21: 라우트 기본 구조 구현 — 중첩 라우트, 리다이렉트, 404, 대메뉴 연결
-- 2026-08-23: 대메뉴 NavLink 연결 및 기본 스타일 적용
-- 2026-08-23: 회원 목록 / 상세 / 등록 / 수정 구현 (`useParams`, `useNavigate`, localStorage 연동)
+- 2026-08-22: 대메뉴 NavLink 연결 및 기본 스타일 적용
+- 2026-08-22: 회원 목록 / 상세 / 등록 / 수정 구현 (`useParams`, `useNavigate`, localStorage 연동)
 
 
 ## 라우트 구조
