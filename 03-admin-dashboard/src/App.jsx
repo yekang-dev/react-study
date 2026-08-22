@@ -4,6 +4,7 @@ import TopMenu from './layouts/TopMenu'
 import Dashboard from './pages/Dashboard'
 import NoticeList from './pages/notice/NoticeList'
 import UserList from './pages/user/UserList'
+import UserDetail from "./pages/user/UserDetail"
 import NotFound from "./pages/NotFound"
 
 // App.jsx : 실제 화면 구조를 그리는 곳.
@@ -29,7 +30,11 @@ function App() {
           <Route index element={<Navigate to="dashboard" replace />} />
           <Route path="dashboard" element={<Dashboard/>}/>
           <Route path="notice" element={<NoticeList/>}/>
+
+
           <Route path="user" element={<UserList/>}/>
+          {/* url을 통해 매칭된 id값을 호출 하려면 아래와 같이 진행 */}
+          <Route path="user/detail/:id" element={<UserDetail/>}/>
         </Route>
         {/* 위의 어느 것에도 안 걸린 나머지의 경로로 접근 시 */}
         <Route path="*" element={<NotFound />} />
