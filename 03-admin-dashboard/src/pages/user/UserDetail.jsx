@@ -7,7 +7,7 @@ function UserDetail () {
   // 객체 형식으로 반환 { id: "1" }, Route에 설정된 이름과 동일
   // URL은 텍스트이므로 값은 항상 문자열.
   // ?page=2 같은 쿼리스트링은 안 나옴. (useSearchParams 담당)
-  
+
   // const id = userParams().id 도 가능.
   // 여러개일 경우, const { id, pw } = useParams();
   const { id } = useParams();
@@ -49,9 +49,12 @@ function UserDetail () {
       </tbody>
     </table>
     <br/>
-    <div>
+    <div className="list-footer">
       <button type="button">
         <Link to="/admin/user">목록</Link>
+      </button>
+      <button type="button">
+        <Link to={`/admin/user/update/${userData.id}`}>수정</Link>
       </button>
     </div>
     </>

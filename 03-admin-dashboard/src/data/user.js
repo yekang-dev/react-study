@@ -22,8 +22,28 @@ export const users = [
   { id: 20, name: '권상혁', email: 'kwon.sh@test.com',  phone: '010-0246-9135', role: '일반',   joinedAt: '2024-12-13' },
 ];
 
+// 사용자 목록 불러오기
+export const loadUsers = () => {
+  const saved = localStorage.getItem('users');
+  if (saved === null) return users;
+  try {
+    return JSON.parse(saved);
+  } catch {
+    return users;
+  }
+};
+
+
 // 사용자 상세 정보 가져옴
 // URL에서 가져온 값은 문자열이므로 Number()를 통해서 숫자로 바꿔주어야함.
 export const userDetail = (id) => {
-  return users.find(user => user.id === Number(id));
+  return loadUsers().find(user => user.id === Number(id));
 };
+
+
+// 사용자
+export const userInsert = (newData) => {
+  const users = loadUsers();
+  const update = [...users, newData]
+  localStorage.setItem('users', JSON.stringify(update));
+}

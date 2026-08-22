@@ -1,10 +1,20 @@
-import { users } from '../../data/user'
+import { loadUsers } from '../../data/user'
 import { Link } from 'react-router'
 
 function UserList(){
+
+  const users = loadUsers();
+  
   return (
     <>
-    <h2>사용자 목록</h2>
+    <div className="list-header">
+      <h2>사용자 목록</h2>
+      <button type="button">
+        <Link to="/admin/user/regist">
+          등록
+        </Link>
+      </button>
+    </div>
     <table>
       <thead>
         <tr>

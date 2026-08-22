@@ -54,3 +54,20 @@ th, td {
 th {
   background: #f0f0f0;
 }
+
+.list-header {
+  display: flex;
+  justify-content: space-between; /* 제목은 왼쪽, 버튼은 오른쪽 끝 */
+  align-items: center;            /* 세로 중앙 정렬 */
+
+  h2 {
+    margin: 0; 
+    margin-bottom: 10px;
+  }
+}
+
+.list-footer {
+  display: flex;
+  justify-content: space-between; /* 제목은 왼쪽, 버튼은 오른쪽 끝 */
+  align-items: center;            /* 세로 중앙 정렬 */
+}
