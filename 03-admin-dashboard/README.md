@@ -1,7 +1,6 @@
 # 관리자 대시보드 (React Router 라우팅 연습)
 
-React Router 라우팅 연습을 위한 관리자 대시보드 웹
-React Router를 활용한 라우팅 구조 학습
+React Router를 활용한 라우팅 구조 학습을 위한 관리자 대시보드 웹
 
 ## 사용 기술
 - React (Vite)
@@ -11,7 +10,15 @@ React Router를 활용한 라우팅 구조 학습
 > 스타일(CSS)은 학습 범위가 아니므로 AI가 제공한 것을 그대로 사용.
 
 ## 주요 기능
-
+- 중첩 라우트 기반 공통 레이아웃 (Outlet)
+- 대메뉴 현재 위치 활성 표시 (NavLink)
+- `/`, `/admin` 진입 시 대시보드로 리다이렉트 (Navigate)
+- 정의되지 않은 경로 404 처리 (path="*")
+- 회원 목록 렌더링
+- URL 파라미터로 회원 상세 조회 (useParams)
+- 등록 / 수정 화면 통합 (id 유무로 모드 구분)
+- 저장 후 목록 이동 (useNavigate, replace로 재제출 방지)
+- 데이터 계층 분리 및 localStorage 연동
 
 ## 실행 방법
 
@@ -24,6 +31,8 @@ npm run dev
 - 2026-08-19: 프로젝트 세팅 (Vite + React), react-router 설치
 - 2026-08-20: 라우트 구조 설계 (라우트 표 작성)
 - 2026-08-21: 라우트 기본 구조 구현 — 중첩 라우트, 리다이렉트, 404, 대메뉴 연결
+- 2026-08-23: 대메뉴 NavLink 연결 및 기본 스타일 적용
+- 2026-08-23: 회원 목록 / 상세 / 등록 / 수정 구현 (`useParams`, `useNavigate`, localStorage 연동)
 
 
 ## 라우트 구조
