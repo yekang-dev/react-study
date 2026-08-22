@@ -18,9 +18,9 @@ function UserList(){
     <table>
       <thead>
         <tr>
-          <td>번호</td>
-          <td>이름</td>
-          <td>이메일</td>
+          <th>번호</th>
+          <th>이름</th>
+          <th>이메일</th>
         </tr>
       </thead>
       <tbody>

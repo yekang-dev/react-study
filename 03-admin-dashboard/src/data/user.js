@@ -22,6 +22,14 @@ export const users = [
   { id: 20, name: '권상혁', email: 'kwon.sh@test.com',  phone: '010-0246-9135', role: '일반',   joinedAt: '2024-12-13' },
 ];
 
+// 날짜 포멧
+const formatDate = (date = new Date()) => {
+  const yyyy = date.getFullYear();
+  const mm = String(date.getMonth() +1).padStart(2, '0');
+  const dd = String(date.getDate()).padStart(2, '0');
+  return `${yyyy}-${mm}-${dd}`;
+}
+
 // 사용자 목록 불러오기
 export const loadUsers = () => {
   const saved = localStorage.getItem('users');
@@ -33,7 +41,6 @@ export const loadUsers = () => {
   }
 };
 
-
 // 사용자 상세 정보 가져옴
 // URL에서 가져온 값은 문자열이므로 Number()를 통해서 숫자로 바꿔주어야함.
 export const userDetail = (id) => {
@@ -41,9 +48,22 @@ export const userDetail = (id) => {
 };
 
 
-// 사용자
+// 사용자 등록
 export const userInsert = (newData) => {
   const users = loadUsers();
-  const update = [...users, newData]
+  // id랑 가입일 추가
+  const update = [...users, {...newData, id: Date.now(), joinedAt: formatDate()}]
   localStorage.setItem('users', JSON.stringify(update));
+}
+
+// 사용자 수정
+export const userUpdate = (id, data) => {
+  const users = loadUsers();
+
+  // localStorage에서 id 값 동일한거 찾기
+  // {...user, ...data} user 데이터에서 data에서 받아온 값 덮어쓰기(같은 키만)
+  const updateUser = users.map(user => 
+    user.id === Number(id) ? { ...user, ...data } : user
+  )
+  localStorage.setItem('users', JSON.stringify(updateUser));
 }
