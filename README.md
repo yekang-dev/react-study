@@ -1,20 +1,21 @@
 # React Study
 React를 학습하며 진행한 실습 기록
 
-> 이 브랜치는 02번 프로젝트의 비교 전 시점
+> 이 브랜치는 03번 프로젝트의 비교 전 시점
 > 최신 상태는 [main 브랜치](https://github.com/yekang-dev/react-study/tree/main)를 확인
 
 ## 학습 방식
 1. Claude와 대화형 학습을 통해 구현하며 React 기초 문법과 구조를 익히기
 2. AI 코딩 어시스턴트(Claude Code)에게 요구사항을 전달하고, 구현 및 워크플로우를 경험하기
-3. 대화형 학습 — Claude와 대화형 학습을 통해 개념을 하나씩 확인하여 기초 문법과 구조를 익히며 코드를 작성하고, 이해한 내용은 주석으로 남김
-4. AI 코딩 어시스턴트(Claude Code)를 통해 바이브코딩으로 요구사항을 전달, 구현 및 워크플로우를 경험하는 형식으로 같은 기능을 다시 구현
-5. 두 코드를 비교해서 부족한 부분을 직접 수정
+3. 대화형 학습 — Claude와 대화하며 개념을 하나씩 확인하고 코드를 작성, 이해한 내용은 주석으로 남김
+4. 바이브코딩 — Claude Code에 요구사항을 전달해 같은 기능을 다시 구현
+5. 두 코드를 비교해 부족한 부분을 직접 수정
 
 ## 브랜치
 - `main` — 두 코드를 비교한 뒤 수정을 반영한 최종본
 - `initial/01-todo-list` — Todo 리스트 비교 전, 대화형 학습으로 작성한 초기 구현
 - `initial/02-book-search` — 도서 검색 앱 비교 전, 대화형 학습으로 작성한 초기 구현
+- `initial/03-admin-dashboard` — 관리자 대시보드 비교 전, 대화형 학습으로 작성한 초기 구현
 
 AI 구현본(`*-ai` 폴더)은 비교 기준이므로 두 브랜치에서 동일합니다.
 
@@ -24,12 +25,13 @@ AI 구현본(`*-ai` 폴더)은 비교 기준이므로 두 브랜치에서 동일
 |---|---|---|
 | [01-todo-list](./01-todo-list) | Todo List 앱 | 대화형 학습 (상태 관리) |
 | [01-todo-list-ai](./01-todo-list-ai) | Todo List 앱 | Claude Code에게 요구사항 전달 후 구현 |
-| [02-book-list](./02-book-list) | 도서 검색 앱 | 대화형 학습 (API 연동) |
-| [02-book-list-ai](./02-book-list-ai) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 |
+| [02-book-search](./02-book-search) | 도서 검색 앱 | 대화형 학습 (API 연동) |
+| [02-book-search-ai](./02-book-search-ai) | 도서 검색 앱 | Claude Code에게 요구사항 전달 후 구현 |
+| [03-admin-dashboard](./03-admin-dashboard) | 관리자 대시보드 | 대화형 학습 (라우팅) |
 
 
 ## 진행 예정
 - ~~상태 관리 심화~~
 - ~~API 연동~~
-- 라우팅
+- ~~라우팅~~ (진행 중)
 - 백엔드 연결 프로젝트
