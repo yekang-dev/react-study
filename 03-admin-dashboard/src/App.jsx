@@ -3,6 +3,8 @@ import Login from './pages/Login'
 import TopMenu from './layouts/TopMenu'
 import Dashboard from './pages/Dashboard'
 import NoticeList from './pages/notice/NoticeList'
+import NoticeDetail from './pages/notice/NoticeDetail'
+import NoticeForm from './pages/notice/NoticeForm'
 import UserList from './pages/user/UserList'
 import UserDetail from "./pages/user/UserDetail"
 import UserForm from "./pages/user/UserForm"
@@ -35,6 +37,9 @@ function App() {
 
           {/* ============ 게시판 =========== */}
           <Route path="notice" element={<NoticeList/>}/>
+          <Route path="notice/detail/:id" element={<NoticeDetail/>}/>
+          <Route path="notice/regist" element={<NoticeForm/>}/>
+          <Route path="notice/update/:id" element={<NoticeForm/>}/>
 
 
           {/* ============ 사용자 =========== */}
