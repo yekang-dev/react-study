@@ -1,6 +1,7 @@
 import { Link, useNavigate, useSearchParams } from "react-router";
 import { loadNotices } from "../../data/notice"
 import { useState } from "react";
+import NotFoundData from "../../components/NotFoundData";
 
 function NoticeList(){
 
@@ -10,7 +11,7 @@ function NoticeList(){
   const notices = loadNotices();
   const navigate = useNavigate();
 
-  // 검색 및 페이징 처리
+  // 검색 처리 =======================================================
   // setSearchParams은 url에서 ? 뒤에 검색조건(쿼리스트링)을 받음.
   // 따라서 keyword라는 조건을 가져오려면 .get 하는 형식으로 값을 가져와야함.
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,11 +27,31 @@ function NoticeList(){
   const searchTitle = (e) => {
     e.preventDefault();
 
-    setSearchParams({keyword : input});
+    setSearchParams({keyword : input, page : 1});
   }
   
   // 검색하면 해당 목록에서 필터링 (이건 서버 연결시 이렇게 사용 안함.)
   const filtered = notices.filter(notice => notice.title.includes(keyword));
+
+
+  // 페이징 처리(10개) =======================================================
+  const page = Number(searchParams.get('page') ?? 1); // 현재 페이지
+  const PER_PAGE = 10; // 화면에 보일 개수
+  const totalPages = Math.ceil(filtered.length/PER_PAGE); // 페이지의 전체 갯수
+  const pageList = Array.from({ length: totalPages }, (_, i) => i + 1); // 페이지 리스트
+
+  // 데이터 목록
+  const list = filtered.slice((page-1) * PER_PAGE, page * PER_PAGE);
+
+  // 페이지 이전, 다음, 번호 클릭
+  const pageChange = (num) => {
+    setSearchParams({ keyword,  page: num })
+  }
+
+  // page가 totalPages보다 크면 렌더링을 하지 않고 안내 화면으로 대체
+  if(totalPages > 0 && (page > totalPages || page < 1)){
+    return <NotFoundData message="존재하지 않는 페이지입니다." backTo="/admin/notice" />
+  }
 
   return (
     <>
@@ -64,22 +85,58 @@ function NoticeList(){
       </thead>
       <tbody>
         {
-          filtered.map((notice) => (
-            <tr key={notice.id}>
-              <td>{notice.id}</td>
-              <td>
-                <Link to={`/admin/notice/detail/${notice.id}`}>
-                  {notice.title}
-                </Link>
-              </td>
-              <td>{notice.writer}</td>
-              <td>{notice.createdAt}</td>
-              <td>{notice.views}</td>
-            </tr>
-          ))
+          list.length === 0 ? (
+            <tr><td colSpan="5">검색 결과가 없습니다.</td></tr>
+          ) : (
+            list.map((notice) => (
+              <tr key={notice.id}>
+                <td>{notice.id}</td>
+                <td>
+                  <Link to={`/admin/notice/detail/${notice.id}`}>
+                    {notice.title}
+                  </Link>
+                </td>
+                <td>{notice.writer}</td>
+                <td>{notice.createdAt}</td>
+                <td>{notice.views}</td>
+              </tr>
+            ))
+          )
         }
       </tbody>
     </table>
+
+    {
+      list.length !== 0 && (
+        <div className="pagination"> 
+          <button
+            type="button"
+            disabled={page === 1}
+            onClick={() => pageChange(page-1)}
+          >
+            이전
+          </button>
+          {
+            pageList.map((num) => (
+              <button
+                type="button"
+                key={num}
+                onClick={() => pageChange(num)}
+                className={num === page ? "active" : ""}
+              >
+                {num}
+              </button>
+            ))
+          }
+          <button
+            type="button" 
+            disabled={page === totalPages}
+            onClick={() => pageChange(page+1)}
+          >
+            다음
+          </button>
+        </div>
+    )}
     </>
   )
 }

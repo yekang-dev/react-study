@@ -73,3 +73,21 @@ th {
 }
 
 .text-right { text-align: right; }
+
+.pagination {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.pagination button.active {
+  background: #333;
+  color: #fff;
+  border-color: #333;
+}
+
+.pagination button:disabled {
+  color: #ccc;
+  cursor: default;
+}
