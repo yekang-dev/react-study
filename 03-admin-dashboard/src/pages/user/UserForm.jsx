@@ -1,6 +1,7 @@
 import { useState, } from "react";
 import { useNavigate, useParams } from "react-router";
 import { userInsert, userDetail, userUpdate } from "../../data/user";
+import NotFoundData from "../../components/NotFoundData";
 
 function UserForm () {
 
@@ -9,7 +10,7 @@ function UserForm () {
 
   // 수정 시, 데이터 불러오는 용도
   const { id } = useParams();
-  const userData = userDetail(id) ?? {};
+  const userData = userDetail(id);
 
   // 데이터를 form으로 하나로 묶어서 사용
   const [form, setForm] = useState(
@@ -48,6 +49,10 @@ function UserForm () {
     setForm(update => ({...update, [name] : value}));
   }
   
+  // id가 있는데, 데이터가 없으면 렌더링을 하지 않고 안내 화면으로 대체
+  if(id && !userData) {
+    return <NotFoundData message="존재하지 않는 게시글입니다." backTo="/admin/user" />
+  }
 
   return (
     <>

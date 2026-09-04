@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router"
 import { userDetail } from '../../data/user'
+import NotFoundData from "../../components/NotFoundData";
 
 function UserDetail () {
 
@@ -12,6 +13,11 @@ function UserDetail () {
   // 여러개일 경우, const { id, pw } = useParams();
   const { id } = useParams();
   const userData = userDetail(id);
+
+  // 데이터가 없으면 렌더링을 하지 않고 안내 화면으로 대체
+  if(!userData) {
+    return <NotFoundData message="존재하지 않는 게시글입니다." backTo="/admin/user" />
+  }
 
   return (
     <>

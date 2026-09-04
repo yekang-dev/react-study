@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from "react-router";
 import { noticeDetail } from "../../data/notice";
+import NotFoundData from "../../components/NotFoundData";
 
 function NoticeDetail () {
 
@@ -8,6 +9,11 @@ function NoticeDetail () {
 
   // 이동용
   const navigate = useNavigate();
+
+  // 데이터가 없으면 렌더링을 하지 않고 안내 화면으로 대체
+  if(!data) {
+    return <NotFoundData message="존재하지 않는 게시글입니다." backTo="/admin/notice" />
+  }
 
   return (
     <>

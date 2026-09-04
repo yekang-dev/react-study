@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { insertNotice, noticeDetail, updateNotice } from "../../data/notice";
+import NotFoundData from "../../components/NotFoundData";
 
 function NoticeForm () {
 
@@ -52,13 +53,18 @@ function NoticeForm () {
     navigate(`/admin/notice/detail/${id}`, { replace: true });
   } 
 
+  // id가 있는데, 데이터가 없으면 렌더링을 하지 않고 안내 화면으로 대체
+  if(id && !noticeData) {
+    return <NotFoundData message="존재하지 않는 게시글입니다." backTo="/admin/notice" />
+  }
+
 
   return (
     <>
     <div className="list-header">
       {/* !noticeData 를 사용해도 되는데, 왜 !id를 쓰느냐.
-       - noticeData 일 경우 : 그 데이터가 실제로 있는지
-       - id 일 경우 : 사용자가 뭘 하러 왔는지
+        - noticeData 일 경우 : 그 데이터가 실제로 있는지
+        - id 일 경우 : 사용자가 뭘 하러 왔는지
        여기서는 모드를 정하는 것인데, 데이터가 있느냐 없느냐의 구분이 아니므로 id! */}
       <h2>공지사항 {!id ? '등록' : '수정'}</h2>
     </div>
